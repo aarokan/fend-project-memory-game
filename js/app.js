@@ -36,8 +36,24 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+// define an array to match the opened cards
+ let openedCards = [];
+
  function openCard (evt) {
    evt.target.classList.add('open', 'show');
+   openedCards.push(evt.target);
+   console.log(openedCards);
+   matchCards();
+ }
+
+ function matchCards () {
+   if (openedCards.length > 1) {
+     if (openedCards[0].firstElementChild.className === openedCards[1].firstElementChild.className) {
+       console.log('mathced');
+     } else {
+       console.log('unmatched');
+     }
+   }
  }
 
 const deck = document.querySelector('.deck');
