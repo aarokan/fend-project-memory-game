@@ -39,6 +39,7 @@ function shuffle(array) {
 // define an array to match the opened cards
  let openedCards = [];
 
+// Display the card's symbol & add the card to a *list* of "openedCards" then call "matchCards" function
  function openCard (evt) {
    evt.target.classList.add('open', 'show');
    openedCards.push(evt.target);
@@ -46,10 +47,13 @@ function shuffle(array) {
    matchCards();
  }
 
+// Check if the cards do match, lock the cards. if not call "unmatchedCards"function
  function matchCards () {
    if (openedCards.length > 1) {
      if (openedCards[0].firstElementChild.className === openedCards[1].firstElementChild.className) {
-       console.log('mathced');
+       openedCards[0].className = 'card match';
+       openedCards[1].className = 'card match';
+       openedCards = [];
      } else {
        console.log('unmatched');
      }
