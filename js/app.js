@@ -40,25 +40,32 @@ function shuffle(array) {
  let openedCards = [];
 
 // Display the card's symbol & add the card to a *list* of "openedCards" then call "matchCards" function
- function openCard (evt) {
-   evt.target.classList.add('open', 'show');
-   openedCards.push(evt.target);
-   console.log(openedCards);
-   matchCards();
- }
+function openCard (evt) {
+  evt.target.classList.add('open', 'show');
+  openedCards.push(evt.target);
+  console.log(openedCards);
+  matchCards();
+}
 
 // Check if the cards do match, lock the cards. if not call "unmatchedCards"function
- function matchCards () {
+  function matchCards () {
    if (openedCards.length > 1) {
      if (openedCards[0].firstElementChild.className === openedCards[1].firstElementChild.className) {
        openedCards[0].className = 'card match';
        openedCards[1].className = 'card match';
        openedCards = [];
      } else {
-       console.log('unmatched');
+       setTimeout(unmatchedCards, 1800);
      }
    }
- }
+  }
+
+// Hide the card's symbol & remove the cards from "openedCards" list
+function unmatchedCards () {
+  openedCards[0].className = 'card';
+  openedCards[1].className = 'card';
+  openedCards = [];
+}
 
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openCard);
