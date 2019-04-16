@@ -39,12 +39,18 @@ function shuffle(array) {
 // define an array to match the opened cards
 let openedCards = [];
 
+let moveCounter = 0;
+const moves = document.querySelector('.moves');
+
+const deck = document.querySelector('.deck');
+deck.addEventListener('click', openCard);
+
 // Display the card's symbol & add the card to a *list* of "openedCards" then call "matchCards" function
 function openCard (evt) {
     if (openedCards.length < 2) {
         evt.target.classList.add('open', 'show');
         openedCards.push(evt.target);
-        console.log(openedCards);
+        updateMoves();
         matchCards();
     }
 }
@@ -69,5 +75,7 @@ function unmatchedCards () {
     openedCards = [];
 }
 
-const deck = document.querySelector('.deck');
-deck.addEventListener('click', openCard);
+function updateMoves() {
+    moveCounter += 1;
+    moves.textContent = moveCounter;
+}
