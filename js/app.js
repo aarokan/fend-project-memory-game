@@ -41,10 +41,12 @@ let openedCards = [];
 
 // Display the card's symbol & add the card to a *list* of "openedCards" then call "matchCards" function
 function openCard (evt) {
-    evt.target.classList.add('open', 'show');
-    openedCards.push(evt.target);
-    console.log(openedCards);
-    matchCards();
+    if (openedCards.length < 2) {
+        evt.target.classList.add('open', 'show');
+        openedCards.push(evt.target);
+        console.log(openedCards);
+        matchCards();
+    }
 }
 
 // Check if the cards do match, lock the cards. if not call "unmatchedCards"function
