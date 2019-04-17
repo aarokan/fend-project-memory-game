@@ -42,6 +42,8 @@ let openedCards = [];
 let moveCounter = 0;
 const moves = document.querySelector('.moves');
 
+const stars = document.querySelectorAll('.fa-star');
+
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openCard);
 
@@ -78,4 +80,21 @@ function unmatchedCards () {
 function updateMoves() {
     moveCounter += 1;
     moves.textContent = moveCounter;
+
+    rateStars();
+}
+
+function rateStars() {
+    emptyStar = 'fa fa-star-o';
+    switch (moveCounter) {
+        case 20:
+            stars[2].className = emptyStar;
+            break;
+        case 24:
+            stars[1].className = emptyStar;
+            break;
+        case 28:
+            stars[0].className = emptyStar;
+            break;
+  }
 }
