@@ -48,7 +48,7 @@ const deck = document.querySelector('.deck');
 deck.addEventListener('click', openCard);
 
 // Display the card's symbol & add the card to a *list* of "openedCards" then call "matchCards" function
-function openCard (evt) {
+function openCard(evt) {
     if (openedCards.length < 2) {
         evt.target.classList.add('open', 'show');
         openedCards.push(evt.target);
@@ -57,8 +57,8 @@ function openCard (evt) {
     }
 }
 
-// Check if the cards do match, lock the cards. if not call "unmatchedCards"function
-function matchCards () {
+// Check if the cards do match, lock the cards. if not call "unmatchedCards"
+function matchCards() {
     if (openedCards.length > 1) {
         if (openedCards[0].firstElementChild.className === openedCards[1].firstElementChild.className) {
             openedCards[0].className = 'card match';
@@ -70,13 +70,14 @@ function matchCards () {
     }
 }
 
-// Hide the card's symbol & remove the cards from "openedCards" list
-function unmatchedCards () {
+// Hide the card's symbol & remove the cards from "openedCards"
+function unmatchedCards() {
     openedCards[0].className = 'card';
     openedCards[1].className = 'card';
     openedCards = [];
 }
 
+// Increment the move counter and display it on the page then call "rateStars"
 function updateMoves() {
     moveCounter += 1;
     moves.textContent = moveCounter;
@@ -84,6 +85,7 @@ function updateMoves() {
     rateStars();
 }
 
+// Decrease star rating after number of moves
 function rateStars() {
     emptyStar = 'fa fa-star-o';
     switch (moveCounter) {
