@@ -2,6 +2,25 @@
  * Create a list that holds all of your cards
  */
 
+let listOfCards = [
+    "fa fa-anchor",
+    "fa fa-anchor",
+    "fa fa-bicycle",
+    "fa fa-bicycle",
+    "fa fa-bolt",
+    "fa fa-bolt",
+    "fa fa-bomb",
+    "fa fa-bomb",
+    "fa fa-cube",
+    "fa fa-cube",
+    "fa fa-diamond",
+    "fa fa-diamond",
+    "fa fa-leaf",
+    "fa fa-leaf",
+    "fa fa-paper-plane-o",
+    "fa fa-paper-plane-o"
+];
+
 
 /*
  * Display the cards on the page
@@ -25,6 +44,23 @@ function shuffle(array) {
     return array;
 }
 
+// store the HTML of the shuffled card
+let cardsHtml = '';
+
+// Display the cards on the page
+function buildGameBoard() {
+    listOfCards = shuffle(listOfCards);
+
+// loop through each card and create its HTML
+    listOfCards.forEach(function(element) {
+        cardsHtml += `<li class="card">
+                          <i class="${element}"></i>
+                      </li>`;
+    });
+
+    deck.innerHTML = cardsHtml;
+}
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -36,6 +72,7 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
 // define an array to match the opened cards
 let openedCards = [];
 
@@ -46,6 +83,8 @@ const stars = document.querySelectorAll('.fa-star');
 
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openCard);
+
+buildGameBoard();
 
 // Display the card's symbol & add the card to a *list* of "openedCards" then call "matchCards" function
 function openCard(evt) {
