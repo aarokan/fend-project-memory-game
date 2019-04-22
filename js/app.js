@@ -44,8 +44,10 @@ function shuffle(array) {
     return array;
 }
 
-// store the HTML of the shuffled card
-let cardsHtml = '';
+
+/*
+ * Start the game and insert the timer HTML
+ */
 
 const resetButton = document.querySelector('.restart');
 
@@ -54,11 +56,17 @@ function initGame() {
     resetButton.insertAdjacentHTML('afterend',`<div class="time">00:00</div>`);
 }
 
-// Display the cards on the page
+
+/*
+ * Display the shuffled cards on the page
+ */
+
+let cardsHtml = '';
+
 function buildGameBoard() {
     listOfCards = shuffle(listOfCards);
 
-// loop through each card and create its HTML
+    // loop through each card and create its HTML
     listOfCards.forEach(function(element) {
         cardsHtml += `<li class="card">
                           <i class="${element}"></i>
@@ -80,22 +88,19 @@ function buildGameBoard() {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-// define an array to match the opened cards
-let openedCards = [];
-
-let matchedCardsCounter = 0;
-
-let moveCounter = 0;
-const moves = document.querySelector('.moves');
-
-const stars = document.querySelectorAll('.fa-star');
-
+// Set up the event listener
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openCard);
 
+
+// Start the game
 initGame();
 
-// Display timer on the score panel
+
+/*
+ * Display timer on the score panel
+ */
+
 let seconds = 0;
 let minutes = 0;
 
@@ -116,7 +121,14 @@ const intervalID = setInterval(function calculateTime() {
 
 }, 1000);
 
-// Display the card's symbol & add the card to a *list* of "openedCards" then call "matchCards" function
+
+/*
+ * Display the card's symbol & add the card to a *list* of "openedCards"
+ * then call "matchCards" function
+ */
+
+let openedCards = [];
+
 function openCard(evt) {
     if (openedCards.length < 2) {
         evt.target.classList.add('open', 'show');
@@ -126,7 +138,13 @@ function openCard(evt) {
     }
 }
 
-// Check if the cards do match, lock the cards. if not call "unmatchedCards"
+
+/*
+ * Check if the cards do match, lock the cards. if not call "unmatchedCards"
+ */
+
+let matchedCardsCounter = 0;
+
 function matchCards() {
     if (openedCards.length > 1) {
         if (openedCards[0].firstElementChild.className === openedCards[1].firstElementChild.className) {
@@ -146,14 +164,25 @@ function matchCards() {
     }
 }
 
-// Hide the card's symbol & remove the cards from "openedCards"
+
+/*
+ * Hide the card's symbol & remove the cards from "openedCards"
+ */
+
 function unmatchedCards() {
     openedCards[0].className = 'card';
     openedCards[1].className = 'card';
     openedCards = [];
 }
 
-// Increment the move counter and display it on the page then call "rateStars"
+
+/*
+ * Increment the move counter and display it on the page then call "rateStars"
+ */
+
+let moveCounter = 0;
+const moves = document.querySelector('.moves');
+
 function updateMoves() {
     moveCounter += 1;
     moves.textContent = moveCounter;
@@ -161,7 +190,13 @@ function updateMoves() {
     rateStars();
 }
 
-// Decrease star rating after number of moves
+
+/*
+ * Decrease star rating after number of moves
+ */
+
+const stars = document.querySelectorAll('.fa-star');
+
 function rateStars() {
     emptyStar = 'fa fa-star-o';
     switch (moveCounter) {
@@ -176,6 +211,11 @@ function rateStars() {
             break;
   }
 }
+
+
+/*
+ * Show a modal to congratulate the player and ask if they want to play again
+ */
 
 function showWinModal() {
     console.log('Congratulation! you Win!');
