@@ -76,6 +76,8 @@ function buildGameBoard() {
 // define an array to match the opened cards
 let openedCards = [];
 
+let matchedCardsCounter = 0;
+
 let moveCounter = 0;
 const moves = document.querySelector('.moves');
 
@@ -103,6 +105,13 @@ function matchCards() {
             openedCards[0].className = 'card match';
             openedCards[1].className = 'card match';
             openedCards = [];
+
+            matchedCardsCounter += 1;
+
+            if (matchedCardsCounter === 8) {
+                showWinModal();
+            }
+
         } else {
             setTimeout(unmatchedCards, 1800);
         }
@@ -138,4 +147,8 @@ function rateStars() {
             stars[0].className = emptyStar;
             break;
   }
+}
+
+function showWinModal() {
+    console.log('Congratulation! you Win!');
 }
