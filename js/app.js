@@ -47,6 +47,13 @@ function shuffle(array) {
 // store the HTML of the shuffled card
 let cardsHtml = '';
 
+const resetButton = document.querySelector('.restart');
+
+function initGame() {
+    buildGameBoard();
+    resetButton.insertAdjacentHTML('afterend',`<div class="time">00:00</div>`);
+}
+
 // Display the cards on the page
 function buildGameBoard() {
     listOfCards = shuffle(listOfCards);
@@ -86,7 +93,28 @@ const stars = document.querySelectorAll('.fa-star');
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openCard);
 
-buildGameBoard();
+initGame();
+
+// Display timer on the score panel
+let seconds = 0;
+let minutes = 0;
+
+const timer = document.querySelector('.time');
+const intervalID = setInterval(function calculateTime() {
+
+    let formatedSeconds = ("0" + seconds).slice(-2);
+    let formatedMinutes = ("0" + minutes).slice(-2);
+
+    seconds += 1;
+
+    if (seconds === 60) {
+        seconds = 0;
+        minutes += 1;
+    }
+
+    timer.innerText = `${formatedMinutes}:${formatedSeconds}`
+
+}, 1000);
 
 // Display the card's symbol & add the card to a *list* of "openedCards" then call "matchCards" function
 function openCard(evt) {
@@ -151,4 +179,5 @@ function rateStars() {
 
 function showWinModal() {
     console.log('Congratulation! you Win!');
+    clearInterval(intervalID);
 }
