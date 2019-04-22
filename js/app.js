@@ -53,7 +53,7 @@ const resetButton = document.querySelector('.restart');
 
 function initGame() {
     buildGameBoard();
-    resetButton.insertAdjacentHTML('afterend',`<div class="time">00:00</div>`);
+    // resetButton.insertAdjacentHTML('afterend',`<div class="time">00:00</div>`);
 }
 
 
@@ -210,6 +210,30 @@ function rateStars() {
             stars[0].className = emptyStar;
             break;
   }
+}
+
+
+/*
+ * Reset the game board, the timer, and the star rating
+ */
+
+resetButton.addEventListener('click', resetGame);
+
+function resetGame() {
+    deck.innerHTML = '';
+    cardsHtml = '';
+
+    seconds = 0;
+    minutes = 0;
+
+    moveCounter = 0;
+    moves.textContent = moveCounter;
+
+    stars.forEach(function(element) {
+        element.className = 'fa fa-star';
+    })
+
+    initGame();
 }
 
 
