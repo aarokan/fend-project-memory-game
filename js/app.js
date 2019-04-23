@@ -49,11 +49,12 @@ function shuffle(array) {
  * Start the game and insert the timer HTML
  */
 
-const resetButton = document.querySelector('.restart');
+ // Declare intervalID as global variable, so it can be accessed  from any function to clearInterval
+let intervalID;
 
 function initGame() {
     buildGameBoard();
-    // resetButton.insertAdjacentHTML('afterend',`<div class="time">00:00</div>`);
+    intervalID = setTime();
 }
 
 
@@ -92,8 +93,7 @@ function buildGameBoard() {
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openCard);
 
-
-// Start the game
+// Initilize the game
 initGame();
 
 
@@ -101,25 +101,30 @@ initGame();
  * Display timer on the score panel
  */
 
-let seconds = 0;
-let minutes = 0;
+function setTime() {
+    let seconds = 0;
+    let minutes = 0;
 
-const timer = document.querySelector('.time');
-const intervalID = setInterval(function calculateTime() {
+    const timer = document.querySelector('.time');
+    const intID = setInterval(function calculateTime() {
 
-    let formatedSeconds = ("0" + seconds).slice(-2);
-    let formatedMinutes = ("0" + minutes).slice(-2);
+        let formatedSeconds = ("0" + seconds).slice(-2);
+        let formatedMinutes = ("0" + minutes).slice(-2);
 
-    seconds += 1;
+        seconds += 1;
 
-    if (seconds === 60) {
-        seconds = 0;
-        minutes += 1;
-    }
+        if (seconds === 60) {
+            seconds = 0;
+            minutes += 1;
+        }
 
-    timer.innerText = `${formatedMinutes}:${formatedSeconds}`
+        timer.innerText = `${formatedMinutes}:${formatedSeconds}`
 
-}, 1000);
+    }, 1000);
+
+    return intID;
+
+}
 
 
 /*
@@ -217,6 +222,7 @@ function rateStars() {
  * Reset the game board, the timer, and the star rating
  */
 
+const resetButton = document.querySelector('.restart');
 resetButton.addEventListener('click', resetGame);
 
 function resetGame() {
@@ -225,6 +231,7 @@ function resetGame() {
 
     seconds = 0;
     minutes = 0;
+    clearInterval(intervalID);
 
     moveCounter = 0;
     moves.textContent = moveCounter;
@@ -234,6 +241,7 @@ function resetGame() {
     })
 
     initGame();
+
 }
 
 
