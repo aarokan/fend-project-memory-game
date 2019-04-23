@@ -135,7 +135,7 @@ function setTime() {
 let openedCards = [];
 
 function openCard(evt) {
-    if (openedCards.length < 2) {
+    if (openedCards.length < 2 && evt.target.nodeName === 'LI') {
         evt.target.classList.add('open', 'show');
         openedCards.push(evt.target);
         updateMoves();
