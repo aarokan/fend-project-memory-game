@@ -89,7 +89,7 @@ function buildGameBoard() {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-// Set up the event listener
+// Set up the event listener to open the cards
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openCard);
 
@@ -204,17 +204,22 @@ function updateMoves() {
 
 const stars = document.querySelectorAll('.fa-star');
 
+let starsCounter = 3;
+
 function rateStars() {
     emptyStar = 'fa fa-star-o';
     switch (moveCounter) {
         case 20:
             stars[2].className = emptyStar;
+            starsCounter = 2;
             break;
         case 24:
             stars[1].className = emptyStar;
+            starsCounter = 1;
             break;
         case 28:
             stars[0].className = emptyStar;
+            starsCounter = 0;
             break;
   }
 }
@@ -251,7 +256,27 @@ function resetGame() {
  * Show a modal to congratulate the player and ask if they want to play again
  */
 
+const modalBg = document.querySelector('.modal-bg');
+
 function showWinModal() {
-    console.log('Congratulation! you Win!');
     clearInterval(intervalID);
+
+    document.querySelector('.modal-moves').textContent = moveCounter;
+    document.querySelector('.modal-stars').textContent = starsCounter;
+    // document.querySelector('.modal-time').textContent = `${formatedMinutes}:${formatedSeconds}`
+
+    modalBg.style.display = 'flex';
 }
+
+// Set up an event listener to close the modal pop up
+const modalClose = document.querySelector('.modal-close');
+modalClose.addEventListener('click', function closeModal() {
+    modalBg.style.display = 'none';
+});
+
+// Set up an event listener to play again
+const modalButton = document.querySelector('.modal-button');
+modalButton.addEventListener('click', function playAgain() {
+    modalBg.style.display = 'none';
+    resetGame();
+});
