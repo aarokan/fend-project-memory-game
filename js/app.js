@@ -212,15 +212,15 @@ let starsCounter = 3;
 function rateStars() {
     emptyStar = 'fa fa-star-o';
     switch (moveCounter) {
-        case 20:
+        case 28:
             stars[2].className = emptyStar;
             starsCounter = 2;
             break;
-        case 24:
+        case 37:
             stars[1].className = emptyStar;
             starsCounter = 1;
             break;
-        case 28:
+        case 44:
             stars[0].className = emptyStar;
             starsCounter = 0;
             break;
@@ -236,6 +236,8 @@ const resetButton = document.querySelector('.restart');
 resetButton.addEventListener('click', resetGame);
 
 function resetGame() {
+    matchedCardsCounter = 0;
+
     deck.innerHTML = '';
     cardsHtml = '';
 
