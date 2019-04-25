@@ -101,6 +101,9 @@ initGame();
  * Display timer on the score panel
  */
 
+let formatedSeconds;
+let formatedMinutes;
+
 function setTime() {
     let seconds = 0;
     let minutes = 0;
@@ -108,8 +111,8 @@ function setTime() {
     const timer = document.querySelector('.time');
     const intID = setInterval(function calculateTime() {
 
-        let formatedSeconds = ("0" + seconds).slice(-2);
-        let formatedMinutes = ("0" + minutes).slice(-2);
+        formatedSeconds = ("0" + seconds).slice(-2);
+        formatedMinutes = ("0" + minutes).slice(-2);
 
         seconds += 1;
 
@@ -236,8 +239,6 @@ function resetGame() {
     deck.innerHTML = '';
     cardsHtml = '';
 
-    seconds = 0;
-    minutes = 0;
     clearInterval(intervalID);
 
     moveCounter = 0;
@@ -263,7 +264,7 @@ function showWinModal() {
 
     document.querySelector('.modal-moves').textContent = moveCounter;
     document.querySelector('.modal-stars').textContent = starsCounter;
-    // document.querySelector('.modal-time').textContent = `${formatedMinutes}:${formatedSeconds}`
+    document.querySelector('.modal-time').textContent = `${formatedMinutes}:${formatedSeconds}`
 
     modalBg.style.display = 'flex';
 }
