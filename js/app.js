@@ -169,6 +169,8 @@ function matchCards() {
             }
 
         } else {
+            openedCards[0].className = 'card unmatch';
+            openedCards[1].className = 'card unmatch';
             setTimeout(unmatchedCards, 1800);
         }
     }
