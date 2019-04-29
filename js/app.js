@@ -222,10 +222,6 @@ function rateStars() {
             stars[1].className = emptyStar;
             starsCounter = 1;
             break;
-        case 44:
-            stars[0].className = emptyStar;
-            starsCounter = 0;
-            break;
   }
 }
 
@@ -239,7 +235,7 @@ resetButton.addEventListener('click', resetGame);
 
 function resetGame() {
     openedCards = [];
-    
+
     matchedCardsCounter = 0;
 
     deck.innerHTML = '';
