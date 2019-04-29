@@ -238,6 +238,8 @@ const resetButton = document.querySelector('.restart');
 resetButton.addEventListener('click', resetGame);
 
 function resetGame() {
+    openedCards = [];
+    
     matchedCardsCounter = 0;
 
     deck.innerHTML = '';
