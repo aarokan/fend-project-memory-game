@@ -4,22 +4,17 @@
 
 let listOfCards = [
     "fa fa-anchor",
-    "fa fa-anchor",
-    "fa fa-bicycle",
     "fa fa-bicycle",
     "fa fa-bolt",
-    "fa fa-bolt",
-    "fa fa-bomb",
     "fa fa-bomb",
     "fa fa-cube",
-    "fa fa-cube",
-    "fa fa-diamond",
     "fa fa-diamond",
     "fa fa-leaf",
-    "fa fa-leaf",
-    "fa fa-paper-plane-o",
     "fa fa-paper-plane-o"
 ];
+
+// Use concat to duplicate the icons
+listOfCards = listOfCards.concat(listOfCards);
 
 
 /*
