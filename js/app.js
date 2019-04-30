@@ -239,7 +239,7 @@ function resetGame() {
     moveCounter = 0;
     moves.textContent = moveCounter;
 
-    stars.forEach(function(element) {
+    stars.forEach((element) => {
         element.className = 'fa fa-star';
     })
 
